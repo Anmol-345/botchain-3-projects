@@ -491,7 +491,7 @@ function EmergencyPanel({
   meta,
   writeContractAsync,
 }: {
-  meta: { activeSigners: bigint; emergencyQueuedAt: bigint } | undefined
+  meta: { activeSigners: bigint; emergencyQueuedAt: bigint; emergencyDelay: bigint } | undefined
   writeContractAsync: ReturnType<typeof import('wagmi').useWriteContract>['writeContractAsync']
 }) {
   const [now, setNow] = _useState(Math.floor(Date.now() / 1000))
@@ -506,7 +506,7 @@ function EmergencyPanel({
 
   if (!meta) return null
 
-  const DELAY = 72 * 3600 // 72 hours in seconds
+  const DELAY = Number(meta.emergencyDelay)
   const queuedAt = Number(meta.emergencyQueuedAt)
   const isQueued = queuedAt > 0
   const executeAfter = queuedAt + DELAY
@@ -532,7 +532,7 @@ function EmergencyPanel({
       })
       await _publicClient.waitForTransactionReceipt({ hash: h })
       setMsg(
-        fn === 'emergencyQueue'    ? 'Emergency queued. Come back in 72 hours to withdraw.' :
+        fn === 'emergencyQueue'    ? `Emergency queued. Come back in ${DELAY / 3600} hours to withdraw.` :
         fn === 'emergencyWithdraw' ? 'Emergency withdrawal executed. Funds sent to your wallet.' :
                                      'Emergency cancelled.',
       )
@@ -548,7 +548,7 @@ function EmergencyPanel({
       <h3 className="text-sm font-light tracking-[0.2em] uppercase text-red-400/70 mb-2">Emergency Withdrawal</h3>
       <p className="text-sm text-white/40 max-w-xl leading-relaxed">
         Last resort only. If all active signers expire and the vault is frozen, the parent-name
-        owner can queue a withdrawal. There is a <strong className="text-white/60">72-hour delay</strong> so signers
+        owner can queue a withdrawal. There is a <strong className="text-white/60">{DELAY / 3600}-hour delay</strong> so signers
         can react. After the delay, the full vault balance is sent to this wallet.
       </p>
 

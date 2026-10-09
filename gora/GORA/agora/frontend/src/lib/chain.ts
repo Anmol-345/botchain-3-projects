@@ -119,7 +119,7 @@ export async function fetchSeats(): Promise<SeatView[]> {
 }
 
 export async function fetchVaultMeta() {
-  const [threshold, nonce, activeSigners, parentOwner, parentData, emergencyQueuedAt] = await Promise.all([
+  const [threshold, nonce, activeSigners, parentOwner, parentData, emergencyQueuedAt, emergencyDelay] = await Promise.all([
     publicClient.readContract({ address: config.vault, abi: vaultAbi, functionName: 'threshold' }),
     publicClient.readContract({ address: config.vault, abi: vaultAbi, functionName: 'nonce' }),
     publicClient.readContract({ address: config.vault, abi: vaultAbi, functionName: 'activeSignerCount' }),
@@ -136,6 +136,7 @@ export async function fetchVaultMeta() {
       args: [BigInt(parentNode)],
     }),
     publicClient.readContract({ address: config.vault, abi: vaultAbi, functionName: 'emergencyQueuedAt' }),
+    publicClient.readContract({ address: config.vault, abi: vaultAbi, functionName: 'EMERGENCY_DELAY' }),
   ])
   return {
     threshold,
@@ -144,6 +145,7 @@ export async function fetchVaultMeta() {
     parentOwner,
     parentExpiry: parentData[2],
     emergencyQueuedAt,
+    emergencyDelay,
   }
 }
 

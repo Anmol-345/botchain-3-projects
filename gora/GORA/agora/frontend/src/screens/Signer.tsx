@@ -206,7 +206,7 @@ export default function Signer() {
         {txs.map((tx) => (
           <div key={tx.id} className="border-l-2 border-white/30 bg-white/5 px-6 py-5 backdrop-blur-md space-y-4">
             <p className="mono text-sm text-white/90">
-              {formatEther(BigInt(tx.value))} ETH → {shortAddr(tx.to)}{' '}
+              {formatEther(BigInt(tx.value))} BOT → {shortAddr(tx.to)}{' '}
               <span className="text-white/40 ml-2">(nonce {tx.nonce})</span>
             </p>
             <p className="text-xs text-white/40 tracking-wide">
