@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Onchain Trivia — BOT Chain</title>
+<meta name="description" content="Play trivia, record your score on BOT Chain, climb the on-chain leaderboard." />
+<script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+<script>if (typeof ethers === 'undefined') document.write('<script src="https:\/\/unpkg.com\/ethers@5.7.2\/dist\/ethers.umd.min.js"><\/script>');</script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #0a0a12; --card: #12121f; --card2: #181830;
+    --acc: #7c5cff; --acc2: #00e0a4; --txt: #eef0ff; --dim: #9aa0c0;
+    --wrong: #ff5470; --right: #00e0a4;
+  }
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: radial-gradient(1200px 600px at 70% -10%, #231a4d 0%, transparent 60%),
+                radial-gradient(900px 500px at 10% 110%, #0c2e2a 0%, transparent 55%), var(--bg);
+    color: var(--txt); min-height: 100vh; padding: 24px 16px 60px;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; }
+  header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 28px; gap: 12px; flex-wrap: wrap; }
+  h1 { font-size: 1.6rem; letter-spacing: .5px; }
+  h1 .bot { color: var(--acc2); }
+  .btn {
+    background: linear-gradient(135deg, var(--acc), #5a3df0); color: #fff; border: 0;
+    padding: 10px 18px; border-radius: 10px; font-weight: 600; cursor: pointer; font-size: .95rem;
+    transition: transform .12s, box-shadow .12s;
+  }
+  .btn:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(124,92,255,.35); }
+  .btn:disabled { opacity: .5; cursor: not-allowed; transform: none; box-shadow: none; }
+  .btn.ghost { background: transparent; border: 1px solid #33335a; }
+  .btn.ghost:hover { border-color: var(--acc); box-shadow: none; }
+  .card { background: var(--card); border: 1px solid #23233f; border-radius: 16px; padding: 24px; margin-bottom: 18px; }
+  .hidden { display: none !important; }
+  .status { color: var(--dim); font-size: .9rem; margin-top: 10px; word-break: break-all; }
+  a { color: var(--acc2); }
+  .q-progress { display: flex; gap: 6px; margin-bottom: 16px; }
+  .q-progress span { flex: 1; height: 6px; border-radius: 3px; background: #26264a; }
+  .q-progress span.done { background: var(--acc2); }
+  .q-progress span.cur { background: var(--acc); }
+  .qnum { color: var(--dim); font-size: .85rem; letter-spacing: 1px; text-transform: uppercase; }
+  .question { font-size: 1.25rem; font-weight: 600; margin: 8px 0 20px; line-height: 1.4; }
+  .opt {
+    display: block; width: 100%; text-align: left; background: var(--card2); border: 1px solid #2c2c52;
+    color: var(--txt); padding: 14px 16px; border-radius: 12px; margin-bottom: 10px; cursor: pointer;
+    font-size: 1rem; transition: all .12s;
+  }
+  .opt:hover:not(:disabled) { border-color: var(--acc); background: #1e1e3d; }
+  .opt.correct { border-color: var(--right); background: rgba(0,224,164,.12); }
+  .opt.wrong { border-color: var(--wrong); background: rgba(255,84,112,.12); }
+  .opt:disabled { cursor: default; }
+  .score-big { font-size: 3rem; font-weight: 800; background: linear-gradient(90deg, var(--acc), var(--acc2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  table { width: 100%; border-collapse: collapse; font-size: .9rem; }
+  th, td { text-align: left; padding: 8px 6px; border-bottom: 1px solid #23233f; }
+  th { color: var(--dim); font-weight: 600; text-transform: uppercase; font-size: .72rem; letter-spacing: 1px; }
+  .mono { font-family: ui-monospace, monospace; }
+  .badge { display: inline-block; background: #1c1c38; border: 1px solid #2e2e58; border-radius: 999px; padding: 3px 12px; font-size: .8rem; color: var(--dim); }
+  .row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 14px; }
+  footer { text-align: center; color: var(--dim); font-size: .8rem; margin-top: 44px; border-top: 1px solid #23233f; padding-top: 36px; }
+  .eco-label { font-size: .68rem; letter-spacing: 1.4px; text-transform: uppercase; }
+  .eco-brand { display: inline-flex; align-items: center; gap: 8px; margin-top: 10px; }
+  .eco-brand img { width: 20px; height: 20px; }
+  .eco-brand span { color: var(--txt); font-weight: 600; font-size: .9rem; }
+  .eco-links { margin-top: 14px; display: flex; justify-content: center; gap: 22px; flex-wrap: wrap; }
+  .eco-links a { color: var(--dim); text-decoration: underline; text-decoration-color: #33335a; text-underline-offset: 3px; transition: color .12s; }
+  .eco-links a:hover { color: var(--txt); }
+  footer .meta { margin-top: 20px; font-size: .72rem; opacity: .7; line-height: 1.7; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>🧠 Onchain <span class="bot">Trivia</span></h1>
+    <div>
+      <span id="netBadge" class="badge">not connected</span>
+      <button id="connectBtn" class="btn">Connect Wallet</button>
+      <button id="disconnectBtn" class="btn ghost hidden">Disconnect</button>
+    </div>
+  </header>
+
+  <div id="homeCard" class="card">
+    <h2>Test your blockchain brain.</h2>
+    <p style="color:var(--dim); margin:10px 0 18px;">
+      8 questions. Answer fast, score high, and record your result permanently on
+      <b>BOT Chain</b>. Top players appear on the on-chain leaderboard.
+    </p>
+    <button id="startBtn" class="btn">Start Trivia</button>
+    <button id="howBtn" class="btn ghost">How it works</button>
+    <div id="homeStatus" class="status"></div>
+  </div>
+
+  <div id="quizCard" class="card hidden">
+    <div id="qProgress" class="q-progress"></div>
+    <div class="qnum" id="qNum"></div>
+    <div class="question" id="qText"></div>
+    <div id="qOpts"></div>
+    <div id="qStatus" class="status"></div>
+  </div>
+
+  <div id="resultCard" class="card hidden" style="text-align:center;">
+    <div class="qnum">Final Score</div>
+    <div class="score-big" id="finalScore"></div>
+    <p id="verdict" style="color:var(--dim); margin:8px 0 4px;"></p>
+    <div class="row" style="justify-content:center;">
+      <button id="recordBtn" class="btn">Record on BOT Chain</button>
+      <button id="againBtn" class="btn ghost">Play Again</button>
+    </div>
+    <div id="txStatus" class="status"></div>
+  </div>
+
+  <div id="statsCard" class="card hidden">
+    <h3 style="margin-bottom:10px;">Your On-chain Record</h3>
+    <div id="myStats" style="color:var(--dim);"></div>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-bottom:10px;">🏆 On-chain Leaderboard</h3>
+    <table>
+      <thead><tr><th>#</th><th>Player</th><th>Best</th></tr></thead>
+      <tbody id="lbBody"><tr><td colspan="3" style="color:var(--dim)">Connect to load leaderboard…</td></tr></tbody>
+    </table>
+  </div>
+
+  <footer>
+    <div class="eco-label">Ecosystem Partner</div>
+    <div class="eco-brand">
+      <img src="botchain-logo.jpeg" alt="BOT Chain logo" />
+      <span>BOT Chain</span>
+    </div>
+    <div class="eco-links">
+      <a href="https://botchain.ai" target="_blank" rel="noopener">BOT Chain Official Website</a>
+      <a href="https://scan.botchain.ai" target="_blank" rel="noopener">BOT Chain Explorer</a>
+    </div>
+    <div class="meta">
+      Contract: <a id="contractLink" class="mono" target="_blank" rel="noopener"></a> · BOT Chain Mainnet (chainId 677)
+    </div>
+  </footer>
+</div>
+<script src="config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

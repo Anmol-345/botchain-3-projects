@@ -1,0 +1,11 @@
+.env
+.env.*
+!.env.example
+node_modules
+build
+coverage
+.DS_Store
+botchain-deploy/artifacts
+botchain-deploy/node_modules
+.vercel
+.env*

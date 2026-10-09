@@ -1,0 +1,6 @@
+askas/
+node_modules/
+__MACOSX/
+.DS_Store
+.env
+build/

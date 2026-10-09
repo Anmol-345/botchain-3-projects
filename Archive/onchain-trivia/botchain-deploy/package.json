@@ -1,0 +1,18 @@
+{
+  "name": "minitq-botchain-deploy",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "dotenv": "^16.6.1",
+    "ethers": "^5.7.2",
+    "solc": "^0.8.19"
+  }
+}

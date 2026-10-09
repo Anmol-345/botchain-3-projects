@@ -1,0 +1,15 @@
+{
+  "name": "zeno-botchain-deploy",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "wallet": "node createWallet.js",
+    "compile": "node compile.js",
+    "deploy": "node deploy.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "ethers": "5.7.2",
+    "solc": "0.8.19"
+  }
+}

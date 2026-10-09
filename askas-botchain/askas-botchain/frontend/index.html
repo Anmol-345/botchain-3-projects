@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AskaS — Creator Content on BOT Chain</title>
+<meta name="description" content="AskaS is a creator content platform on BOT Chain. Creators publish premium content and fans unlock time-based access with BOT." />
+<script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+<style>
+  :root {
+    --bg: #f6f8fb; --panel: #ffffff; --panel2: #f8f9fc; --border: #e4e7ec;
+    --text: #101828; --muted: #667085; --accent: #2563eb; --accent2: #4f46e5;
+    --ok: #079669; --err: #dc2626;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+  .glow { position: fixed; inset: 0; pointer-events: none; background:
+    radial-gradient(600px 300px at 15% -5%, rgba(37,99,235,.08), transparent),
+    radial-gradient(700px 350px at 85% 0%, rgba(79,70,229,.06), transparent); }
+  header { display: flex; align-items: center; justify-content: space-between; padding: 18px 32px; background: var(--panel); border-bottom: 1px solid var(--border); position: relative; z-index: 2; }
+  .logo { font-size: 22px; font-weight: 800; letter-spacing: .5px; }
+  .logo span { background: linear-gradient(90deg, var(--accent), var(--accent2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .badge { font-size: 11px; color: var(--accent); border: 1px solid var(--border); border-radius: 999px; padding: 3px 10px; margin-left: 10px; vertical-align: middle; background: var(--panel2); }
+  .btn { background: linear-gradient(90deg, var(--accent), var(--accent2)); border: none; color: #fff; font-weight: 600; padding: 10px 18px; border-radius: 10px; cursor: pointer; font-size: 14px; transition: all .15s; box-shadow: 0 1px 2px rgba(16,24,40,.06); }
+  .btn:hover { opacity: .92; transform: translateY(-1px); } .btn:disabled { opacity: .45; cursor: not-allowed; }
+  .btn.ghost { background: var(--panel); border: 1px solid var(--border); color: var(--text); }
+  .btn.small { padding: 7px 14px; font-size: 13px; }
+  main { max-width: 760px; margin: 0 auto; padding: 36px 24px 80px; position: relative; z-index: 1; }
+  .hero { text-align: center; padding: 44px 0 40px; }
+  .hero h1 { font-size: 42px; font-weight: 800; line-height: 1.15; color: var(--text); }
+  .hero h1 em { font-style: normal; background: linear-gradient(90deg, var(--accent), var(--accent2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .hero p { color: var(--muted); max-width: 620px; margin: 16px auto 0; font-size: 16px; line-height: 1.6; }
+  .section-title { font-size: 20px; font-weight: 700; margin: 36px 0 16px; }
+  .grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+  .card { background: var(--panel); border: 1px solid var(--border); border-radius: 20px; padding: 28px; box-shadow: 0 4px 20px rgba(16,24,40,.04); transition: transform .2s, box-shadow .2s; }
+  .card:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(16,24,40,.08); }
+  .card h3 { font-size: 20px; font-weight: 700; margin-bottom: 10px; }
+  .card .preview { color: var(--muted); font-size: 15px; line-height: 1.6; min-height: 44px; }
+  .meta { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0; font-size: 13px; }
+  .meta span { background: var(--panel2); border: 1px solid var(--border); border-radius: 8px; padding: 5px 11px; color: var(--muted); }
+  .meta .price { color: var(--accent); font-weight: 700; }
+  .creator { font-size: 12px; color: var(--muted); font-family: monospace; }
+  .access-ok { color: var(--ok); font-size: 14px; font-weight: 600; }
+  .access-no { color: var(--muted); font-size: 14px; }
+  .content-body { display: none; margin-top: 16px; padding: 18px; background: var(--panel2); border: 1px solid var(--border); border-radius: 14px; font-size: 15px; line-height: 1.7; white-space: pre-wrap; word-break: break-word; }
+  .modal { display: none; position: fixed; inset: 0; background: rgba(4,6,12,.45); backdrop-filter: blur(4px); z-index: 10; align-items: center; justify-content: center; padding: 20px; }
+  .modal.open { display: flex; }
+  .modal-box { background: var(--panel); border: 1px solid var(--border); border-radius: 20px; padding: 32px; width: 100%; max-width: 540px; max-height: 90vh; overflow-y: auto; box-shadow: 0 20px 40px rgba(16,24,40,.12); }
+  .modal-box h2 { font-size: 21px; font-weight: 700; margin-bottom: 18px; }
+  label { display: block; font-size: 13px; color: var(--muted); font-weight: 600; margin: 16px 0 6px; }
+  input, textarea, select { width: 100%; background: var(--panel2); border: 1px solid var(--border); border-radius: 12px; color: var(--text); padding: 12px 14px; font-size: 15px; font-family: inherit; transition: border-color .15s; }
+  input:focus, textarea:focus { outline: none; border-color: var(--accent); background: var(--panel); }
+  textarea { resize: vertical; min-height: 100px; }
+  .row { display: flex; gap: 12px; } .row > div { flex: 1; }
+  .status { margin-top: 14px; font-size: 13px; padding: 11px 15px; border-radius: 10px; display: none; }
+  .status.show { display: block; }
+  .status.info { background: #eff4ff; color: var(--accent); }
+  .status.ok { background: #ecfdf3; color: var(--ok); }
+  .status.err { background: #fef3f2; color: var(--err); }
+  .status a { color: inherit; text-decoration: underline; }
+  .tabs { display: flex; gap: 10px; margin-top: 8px; }
+  .empty { color: var(--muted); text-align: center; padding: 50px 0; font-size: 16px; grid-column: 1/-1; }
+  #walletInfo { font-size: 13px; color: var(--muted); font-family: monospace; }
+  footer { text-align: center; color: var(--muted); font-size: 12px; padding: 30px; border-top: 1px solid var(--border); }
+  footer a { color: var(--accent); text-decoration: none; }
+  .eco-label { font-size: 11px; letter-spacing: 1.4px; text-transform: uppercase; margin-bottom: 10px; }
+  .eco-brand { display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 15px; }
+  .eco-brand img { width: 24px; height: 24px; border-radius: 4px; }
+  .eco-brand span { color: var(--text); font-weight: 600; font-size: 14px; }
+  .eco-links { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-bottom: 15px; }
+  .eco-links a { color: var(--muted); text-decoration: underline; text-underline-offset: 3px; }
+  .eco-links a:hover { color: var(--text); }
+</style>
+</head>
+<body>
+<div class="glow"></div>
+<header>
+  <div class="logo">Aska<span>S</span><span class="badge">BOT Chain</span></div>
+  <div style="display:flex;align-items:center;gap:14px">
+    <span id="walletInfo"></span>
+    <button class="btn" id="connectBtn">Connect Wallet</button>
+  </div>
+</header>
+<main>
+  <div class="hero">
+    <h1>Creators publish.<br/>Fans unlock with <em>BOT</em>.</h1>
+    <p>AskaS is a creator content platform on BOT Chain. Creators set a price and access duration — fans pay BOT and get time-limited access, all enforced on-chain.</p>
+    <div class="tabs" style="justify-content:center;margin-top:24px">
+      <button class="btn" id="publishBtn">＋ Publish Paid Content</button>
+      <button class="btn ghost" id="myPostsBtn">My Posts &amp; Access</button>
+    </div>
+  </div>
+
+  <div class="status" id="netStatus"></div>
+
+  <div class="section-title">Explore Content</div>
+  <div class="grid" id="postsGrid"><div class="empty">Connect your wallet to browse content.</div></div>
+</main>
+
+<div class="modal" id="publishModal">
+  <div class="modal-box">
+    <h2>Publish Paid Content</h2>
+    <label>Title</label>
+    <input id="pTitle" maxlength="120" placeholder="e.g. Exclusive DeFi Research Notes" />
+    <label>Public preview (visible to everyone)</label>
+    <textarea id="pPreview" maxlength="500" placeholder="A teaser of what subscribers unlock…"></textarea>
+    <label>Locked content (only paying users can read)</label>
+    <textarea id="pBody" maxlength="8000" placeholder="Your premium content — text, links, guides…"></textarea>
+    <div class="row">
+      <div>
+        <label>Price (BOT)</label>
+        <input id="pPrice" type="number" min="0" step="0.0001" placeholder="0.01" />
+      </div>
+      <div>
+        <label>Access duration</label>
+        <select id="pDuration">
+          <option value="86400">1 day</option>
+          <option value="604800">7 days</option>
+          <option value="2592000" selected>30 days</option>
+          <option value="7776000">90 days</option>
+          <option value="31536000">1 year</option>
+        </select>
+      </div>
+    </div>
+    <div class="status" id="pubStatus"></div>
+    <div style="display:flex;gap:10px;margin-top:20px;justify-content:flex-end">
+      <button class="btn ghost" onclick="closeModal('publishModal')">Cancel</button>
+      <button class="btn" id="publishSubmit">Publish On-Chain</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="myModal">
+  <div class="modal-box" style="max-width:640px">
+    <h2>My Posts &amp; Access</h2>
+    <div id="myContent" style="font-size:14px"></div>
+    <div style="display:flex;justify-content:flex-end;margin-top:20px">
+      <button class="btn ghost" onclick="closeModal('myModal')">Close</button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="eco-label">Ecosystem Partner</div>
+  <div class="eco-brand">
+    <img src="botchain-logo.jpeg" alt="BOT Chain logo" />
+    <span>BOT Chain</span>
+  </div>
+  <div class="eco-links">
+    <a href="https://botchain.ai" target="_blank" rel="noopener">BOT Chain Official Website</a>
+    <a href="https://scan.botchain.ai" target="_blank" rel="noopener">BOT Chain Explorer</a>
+  </div>
+  <div class="meta" style="margin-top: 20px; color: var(--muted); opacity: 0.8;">
+    AskaS on BOT Chain · Contract: <a id="contractLink" target="_blank" rel="noopener">—</a> · Powered by BOT Chain Mainnet (Chain ID 677)
+  </div>
+</footer>
+<script src="config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
