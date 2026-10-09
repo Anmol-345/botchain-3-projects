@@ -1,7 +1,7 @@
 import React from "react";
 import { useSnackbar } from "notistack";
 import { useWallet } from "../../context/WalletContext";
-import { formatAddress, BOT_CHAIN_NAME, BOT_CHAIN_EXPLORER } from "../../constants";
+import { BOT_CHAIN_NAME, BOT_CHAIN_EXPLORER } from "../../constants";
 
 const Account = () => {
   const { account, balance, isCorrectNetwork, chainId, disconnect } = useWallet();

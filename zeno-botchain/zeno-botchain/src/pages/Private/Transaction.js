@@ -5,7 +5,7 @@ import { explorerLink, formatAddress } from "../../constants";
 import Loader from "../../components/Loader";
 
 const Transaction = () => {
-  const { account, provider } = useWallet();
+  const { account } = useWallet();
   const [history, setHistory] = useState([]);
   const [loading, setLoading] = useState(true);
 
