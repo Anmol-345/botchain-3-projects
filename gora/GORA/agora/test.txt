@@ -1,0 +1,28 @@
+No files changed, compilation skipped
+
+Ran 16 tests for test/GoraVault.t.sol:GoraVaultTest
+[PASS] test_Execute_HappyPath_AnyoneCanSubmit() (gas: 216829)
+[PASS] test_ExpiredSeat_StopsSigning_WithoutAnyRevocation() (gas: 157205)
+[PASS] test_ParentOwnershipIsLive_NotCached() (gas: 193864)
+[PASS] test_RemoveSeat() (gas: 94052)
+[PASS] test_RevertWhen_AssignExpiredSeat() (gas: 108268)
+[PASS] test_RevertWhen_BadEphemeralKeyLength() (gas: 18891)
+[PASS] test_RevertWhen_BadNonce_NoReplay() (gas: 218946)
+[PASS] test_RevertWhen_DuplicateSignature() (gas: 147986)
+[PASS] test_RevertWhen_NonSignerSignature() (gas: 156946)
+[PASS] test_RevertWhen_NotParentOwner() (gas: 107993)
+[PASS] test_RevertWhen_RemoveSeat_NotParentOwner() (gas: 18525)
+[PASS] test_RevertWhen_SeatHasNoAddrRecord() (gas: 86421)
+[PASS] test_RevertWhen_SignaturesUnsorted() (gas: 118029)
+[PASS] test_RevertWhen_ThresholdNotMet() (gas: 142923)
+[PASS] test_Rotation_OldAddressRejected_NewAccepted() (gas: 268982)
+[PASS] test_SeatInfo() (gas: 46116)
+Suite result: ok. 16 passed; 0 failed; 0 skipped; finished in 4.19ms (25.12ms CPU time)
+
+???---------------+--------+--------+---------???
+| Test Suite    | Passed | Failed | Skipped |
++===========================================+
+| GoraVaultTest | 16     | 0      | 0       |
+???---------------+--------+--------+---------???
+
+EXITCODE=0

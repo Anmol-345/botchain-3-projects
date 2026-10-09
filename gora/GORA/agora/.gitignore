@@ -1,0 +1,24 @@
+node_modules/
+dist/
+.DS_Store
+*.log
+
+# Vite / app
+frontend/dist/
+frontend/.vite/
+
+# Foundry
+contracts/out/
+contracts/cache/
+contracts/broadcast/
+contracts/lib/
+
+# Secrets — jamais commiter une clé, même de testnet
+.env
+.env.*
+!.env.example
+# exceptions : que des adresses publiques (contrats déployés, RPC, chain id),
+# versionnées exprès pour que toute l'équipe pointe sur le même déploiement.
+# AUCUNE clé privée ne doit jamais entrer dans ces fichiers.
+!frontend/.env.botchain
+!frontend/.env.bohr

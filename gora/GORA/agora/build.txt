@@ -1,0 +1,376 @@
+Compiling 97 files with Solc 0.8.24
+Solc 0.8.24 finished in 5.08s
+Compiler run successful with warnings:
+Warning (2519): This declaration shadows an existing declaration.
+  --> node_modules/@ensdomains/ens-contracts/contracts/registry/ENSRegistry.sol:18:9:
+   |
+18 |         address owner = records[node].owner;
+   |         ^^^^^^^^^^^^^
+Note: The shadowed declaration is here:
+   --> node_modules/@ensdomains/ens-contracts/contracts/registry/ENSRegistry.sol:123:5:
+    |
+123 |     function owner(
+    |     ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning (2519): This declaration shadows an existing declaration.
+  --> node_modules/@ensdomains/ens-contracts/contracts/registry/ENSRegistry.sol:35:9:
+   |
+35 |         address owner,
+   |         ^^^^^^^^^^^^^
+Note: The shadowed declaration is here:
+   --> node_modules/@ensdomains/ens-contracts/contracts/registry/ENSRegistry.sol:123:5:
+    |
+123 |     function owner(
+    |     ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning (2519): This declaration shadows an existing declaration.
+  --> node_modules/@ensdomains/ens-contracts/contracts/registry/ENSRegistry.sol:36:9:
+   |
+36 |         address resolver,
+   |         ^^^^^^^^^^^^^^^^
+Note: The shadowed declaration is here:
+   --> node_modules/@ensdomains/ens-contracts/contracts/registry/ENSRegistry.sol:137:5:
+    |
+137 |     function resolver(
+    |     ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning (2519): This declaration shadows an existing declaration.
+  --> node_modules/@ensdomains/ens-contracts/contracts/registry/ENSRegistry.sol:37:9:
+   |
+37 |         uint64 ttl
+   |         ^^^^^^^^^^
+Note: The shadowed declaration is here:
+   --> node_modules/@ensdomains/ens-contracts/contracts/registry/ENSRegistry.sol:146:5:
+    |
+146 |     function ttl(bytes32 node) public view virtual override returns (uint64) {
+    |     ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning (2519): This declaration shadows an existing declaration.
+  --> node_modules/@ensdomains/ens-contracts/contracts/registry/ENSRegistry.sol:52:9:
+   |
+52 |         address owner,
+   |         ^^^^^^^^^^^^^
+Note: The shadowed declaration is here:
+   --> node_modules/@ensdomains/ens-contracts/contracts/registry/ENSRegistry.sol:123:5:
+    |
+123 |     function owner(
+    |     ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning (2519): This declaration shadows an existing declaration.
+  --> node_modules/@ensdomains/ens-contracts/contracts/registry/ENSRegistry.sol:53:9:
+   |
+53 |         address resolver,
+   |         ^^^^^^^^^^^^^^^^
+Note: The shadowed declaration is here:
+   --> node_modules/@ensdomains/ens-contracts/contracts/registry/ENSRegistry.sol:137:5:
+    |
+137 |     function resolver(
+    |     ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning (2519): This declaration shadows an existing declaration.
+  --> node_modules/@ensdomains/ens-contracts/contracts/registry/ENSRegistry.sol:54:9:
+   |
+54 |         uint64 ttl
+   |         ^^^^^^^^^^
+Note: The shadowed declaration is here:
+   --> node_modules/@ensdomains/ens-contracts/contracts/registry/ENSRegistry.sol:146:5:
+    |
+146 |     function ttl(bytes32 node) public view virtual override returns (uint64) {
+    |     ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning (2519): This declaration shadows an existing declaration.
+  --> node_modules/@ensdomains/ens-contracts/contracts/registry/ENSRegistry.sol:65:9:
+   |
+65 |         address owner
+   |         ^^^^^^^^^^^^^
+Note: The shadowed declaration is here:
+   --> node_modules/@ensdomains/ens-contracts/contracts/registry/ENSRegistry.sol:123:5:
+    |
+123 |     function owner(
+    |     ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning (2519): This declaration shadows an existing declaration.
+  --> node_modules/@ensdomains/ens-contracts/contracts/registry/ENSRegistry.sol:78:9:
+   |
+78 |         address owner
+   |         ^^^^^^^^^^^^^
+Note: The shadowed declaration is here:
+   --> node_modules/@ensdomains/ens-contracts/contracts/registry/ENSRegistry.sol:123:5:
+    |
+123 |     function owner(
+    |     ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning (2519): This declaration shadows an existing declaration.
+  --> node_modules/@ensdomains/ens-contracts/contracts/registry/ENSRegistry.sol:91:9:
+   |
+91 |         address resolver
+   |         ^^^^^^^^^^^^^^^^
+Note: The shadowed declaration is here:
+   --> node_modules/@ensdomains/ens-contracts/contracts/registry/ENSRegistry.sol:137:5:
+    |
+137 |     function resolver(
+    |     ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning (2519): This declaration shadows an existing declaration.
+   --> node_modules/@ensdomains/ens-contracts/contracts/registry/ENSRegistry.sol:102:9:
+    |
+102 |         uint64 ttl
+    |         ^^^^^^^^^^
+Note: The shadowed declaration is here:
+   --> node_modules/@ensdomains/ens-contracts/contracts/registry/ENSRegistry.sol:146:5:
+    |
+146 |     function ttl(bytes32 node) public view virtual override returns (uint64) {
+    |     ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning (2519): This declaration shadows an existing declaration.
+   --> node_modules/@ensdomains/ens-contracts/contracts/registry/ENSRegistry.sol:164:9:
+    |
+164 |         address owner,
+    |         ^^^^^^^^^^^^^
+Note: The shadowed declaration is here:
+   --> node_modules/@ensdomains/ens-contracts/contracts/registry/ENSRegistry.sol:123:5:
+    |
+123 |     function owner(
+    |     ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning (2519): This declaration shadows an existing declaration.
+   --> node_modules/@ensdomains/ens-contracts/contracts/registry/ENSRegistry.sol:170:38:
+    |
+170 |     function _setOwner(bytes32 node, address owner) internal virtual {
+    |                                      ^^^^^^^^^^^^^
+Note: The shadowed declaration is here:
+   --> node_modules/@ensdomains/ens-contracts/contracts/registry/ENSRegistry.sol:123:5:
+    |
+123 |     function owner(
+    |     ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning (2519): This declaration shadows an existing declaration.
+   --> node_modules/@ensdomains/ens-contracts/contracts/registry/ENSRegistry.sol:176:9:
+    |
+176 |         address resolver,
+    |         ^^^^^^^^^^^^^^^^
+Note: The shadowed declaration is here:
+   --> node_modules/@ensdomains/ens-contracts/contracts/registry/ENSRegistry.sol:137:5:
+    |
+137 |     function resolver(
+    |     ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning (2519): This declaration shadows an existing declaration.
+   --> node_modules/@ensdomains/ens-contracts/contracts/registry/ENSRegistry.sol:177:9:
+    |
+177 |         uint64 ttl
+    |         ^^^^^^^^^^
+Note: The shadowed declaration is here:
+   --> node_modules/@ensdomains/ens-contracts/contracts/registry/ENSRegistry.sol:146:5:
+    |
+146 |     function ttl(bytes32 node) public view virtual override returns (uint64) {
+    |     ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning (2519): This declaration shadows an existing declaration.
+   --> node_modules/@ensdomains/ens-contracts/contracts/reverseRegistrar/ReverseRegistrar.sol:129:9:
+    |
+129 |         bytes32 node = claimForAddr(addr, owner, resolver);
+    |         ^^^^^^^^^^^^
+Note: The shadowed declaration is here:
+   --> node_modules/@ensdomains/ens-contracts/contracts/reverseRegistrar/ReverseRegistrar.sol:137:5:
+    |
+137 |     function node(address addr) public pure override returns (bytes32) {
+    |     ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning (2519): This declaration shadows an existing declaration.
+   --> node_modules/@ensdomains/ens-contracts/contracts/wrapper/NameWrapper.sol:348:9:
+    |
+348 |         bytes calldata name,
+    |         ^^^^^^^^^^^^^^^^^^^
+Note: The shadowed declaration is here:
+  --> node_modules/@ensdomains/ens-contracts/contracts/wrapper/NameWrapper.sol:46:5:
+   |
+46 |     string public constant name = "NameWrapper";
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Warning (2519): This declaration shadows an existing declaration.
+   --> node_modules/@ensdomains/ens-contracts/contracts/wrapper/NameWrapper.sol:483:22:
+    |
+483 |     function upgrade(bytes calldata name, bytes calldata extraData) public {
+    |                      ^^^^^^^^^^^^^^^^^^^
+Note: The shadowed declaration is here:
+  --> node_modules/@ensdomains/ens-contracts/contracts/wrapper/NameWrapper.sol:46:5:
+   |
+46 |     string public constant name = "NameWrapper";
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Warning (2519): This declaration shadows an existing declaration.
+   --> node_modules/@ensdomains/ens-contracts/contracts/wrapper/NameWrapper.sol:576:9:
+    |
+576 |         bytes memory name = _saveLabel(parentNode, node, label);
+    |         ^^^^^^^^^^^^^^^^^
+Note: The shadowed declaration is here:
+  --> node_modules/@ensdomains/ens-contracts/contracts/wrapper/NameWrapper.sol:46:5:
+   |
+46 |     string public constant name = "NameWrapper";
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Warning (2519): This declaration shadows an existing declaration.
+   --> node_modules/@ensdomains/ens-contracts/contracts/wrapper/NameWrapper.sol:749:9:
+    |
+749 |         bytes memory name = names[node];
+    |         ^^^^^^^^^^^^^^^^^
+Note: The shadowed declaration is here:
+  --> node_modules/@ensdomains/ens-contracts/contracts/wrapper/NameWrapper.sol:46:5:
+   |
+46 |     string public constant name = "NameWrapper";
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Warning (2519): This declaration shadows an existing declaration.
+   --> node_modules/@ensdomains/ens-contracts/contracts/wrapper/NameWrapper.sol:867:9:
+    |
+867 |         bytes memory name
+    |         ^^^^^^^^^^^^^^^^^
+Note: The shadowed declaration is here:
+  --> node_modules/@ensdomains/ens-contracts/contracts/wrapper/NameWrapper.sol:46:5:
+   |
+46 |     string public constant name = "NameWrapper";
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Warning (2519): This declaration shadows an existing declaration.
+   --> node_modules/@ensdomains/ens-contracts/contracts/wrapper/NameWrapper.sol:896:9:
+    |
+896 |         bytes memory name,
+    |         ^^^^^^^^^^^^^^^^^
+Note: The shadowed declaration is here:
+  --> node_modules/@ensdomains/ens-contracts/contracts/wrapper/NameWrapper.sol:46:5:
+   |
+46 |     string public constant name = "NameWrapper";
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Warning (2519): This declaration shadows an existing declaration.
+   --> node_modules/@ensdomains/ens-contracts/contracts/wrapper/NameWrapper.sol:913:9:
+    |
+913 |         bytes memory name = _addLabel(label, names[parentNode]);
+    |         ^^^^^^^^^^^^^^^^^
+Note: The shadowed declaration is here:
+  --> node_modules/@ensdomains/ens-contracts/contracts/wrapper/NameWrapper.sol:46:5:
+   |
+46 |     string public constant name = "NameWrapper";
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Warning (2519): This declaration shadows an existing declaration.
+   --> node_modules/@ensdomains/ens-contracts/contracts/wrapper/NameWrapper.sol:922:9:
+    |
+922 |         bytes memory name = _addLabel(label, names[parentNode]);
+    |         ^^^^^^^^^^^^^^^^^
+Note: The shadowed declaration is here:
+  --> node_modules/@ensdomains/ens-contracts/contracts/wrapper/NameWrapper.sol:46:5:
+   |
+46 |     string public constant name = "NameWrapper";
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Warning (2519): This declaration shadows an existing declaration.
+   --> node_modules/@ensdomains/ens-contracts/contracts/wrapper/NameWrapper.sol:938:9:
+    |
+938 |         bytes memory name = _addLabel(label, names[parentNode]);
+    |         ^^^^^^^^^^^^^^^^^
+Note: The shadowed declaration is here:
+  --> node_modules/@ensdomains/ens-contracts/contracts/wrapper/NameWrapper.sol:46:5:
+   |
+46 |     string public constant name = "NameWrapper";
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Warning (2519): This declaration shadows an existing declaration.
+    --> node_modules/@ensdomains/ens-contracts/contracts/wrapper/NameWrapper.sol:1006:9:
+     |
+1006 |         bytes memory name = _addLabel(label, "\x03eth\x00");
+     |         ^^^^^^^^^^^^^^^^^
+Note: The shadowed declaration is here:
+  --> node_modules/@ensdomains/ens-contracts/contracts/wrapper/NameWrapper.sol:46:5:
+   |
+46 |     string public constant name = "NameWrapper";
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Warning (2462): Visibility for constructor is ignored. If you want the contract to be non-deployable, making it "abstract" is sufficient.
+  --> node_modules/@ensdomains/ens-contracts/contracts/registry/ENSRegistry.sol:24:5:
+   |
+24 |     constructor() public {
+   |     ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning (2018): Function state mutability can be restricted to pure
+   --> node_modules/@ensdomains/ens-contracts/contracts/ethregistrar/BaseRegistrarImplementation.sol:177:5:
+    |
+177 |     function supportsInterface(
+    |     ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning (2018): Function state mutability can be restricted to pure
+   --> test/GoraVault.t.sol:155:5:
+    |
+155 |     function _insertSorted(bytes32 digest, bytes[] memory sigs, uint256 extraPk, address extraAddr)
+    |     ^ (Relevant source part starts here and spans across multiple lines).
+
+forge : warning[block-timestamp]: usage of `block.timestamp` in a comparison 
+may be manipulated by validators
+At line:1 char:1
++ forge build 2>&1 | Out-File -Encoding ascii ..\build.txt
++ ~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (warning[block-t...d by validators 
+   :String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+    ?????? src\GoraVault.sol:112:13
+    ???
+112 ???         if (expiry <= block.timestamp) revert SeatExpired(node);
+    ???             
+???????????????????????????????????????????????????????????????????????????
+    ???
+    ??? help: 
+https://book.getfoundry.sh/reference/forge/forge-lint#block-timestamp
+
+warning[block-timestamp]: usage of `block.timestamp` in a comparison may be 
+manipulated by validators
+    ?????? src\GoraVault.sol:169:17
+    ???
+169 ???             if (expiry <= block.timestamp) continue;
+    ???                 
+???????????????????????????????????????????????????????????????????????????
+    ???
+    ??? help: 
+https://book.getfoundry.sh/reference/forge/forge-lint#block-timestamp
+
+warning[unsafe-typecast]: typecasts that can truncate values should be checked
+   ?????? test\GoraVault.t.sol:51:54
+   ???
+51 ???             vault.assignSeat(nodes[i], ephemeralKey, uint8(i));
+   ???                                                      
+????????????????????????
+   ???
+   ??? note: consider disabling this lint if you're certain the cast is safe
+   ???       
+   ???       // casting to 'uint8' is safe because [explain why]
+   ???       // forge-lint: disable-next-line(unsafe-typecast)
+   ???       
+   ???       
+   ??? help: 
+https://book.getfoundry.sh/reference/forge/forge-lint#unsafe-typecast
+
+warning[block-timestamp]: usage of `block.timestamp` in a comparison may be 
+manipulated by validators
+    ?????? src\GoraVault.sol:180:17
+    ???
+180 ???             if (expiry <= block.timestamp) continue;
+    ???                 
+???????????????????????????????????????????????????????????????????????????
+    ???
+    ??? help: 
+https://book.getfoundry.sh/reference/forge/forge-lint#block-timestamp
+
+warning[block-timestamp]: usage of `block.timestamp` in a comparison may be 
+manipulated by validators
+    ?????? src\GoraVault.sol:204:32
+    ???
+204 ???         active = registered && expiry > block.timestamp && 
+stealthAddress != address(0);
+    ???                                
+????????????????????????????????????????????????????????????????????????
+    ???
+    ??? help: 
+https://book.getfoundry.sh/reference/forge/forge-lint#block-timestamp
+
+EXITCODE=0
